@@ -1,0 +1,12 @@
+{
+  "name": "pipeline-crm",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "dev": "node scripts/serve.js 5173 index.html"
+  },
+  "engines": { "node": ">=20" },
+  "license": "MIT"
+}

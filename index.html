@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pipeline CRM</title>
+  <meta name="description" content="Funil de vendas kanban com previsão ponderada, alertas de negócios parados e exportação para Excel." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%234f46e5'/><path d='M8 9h4v14H8zM14 9h4v9h-4zM20 9h4v5h-4z' fill='white'/></svg>" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="logo" aria-hidden="true"></span>Pipeline</div>
+    <input id="search" type="search" placeholder="Buscar negócio, empresa, contato…" aria-label="Buscar" />
+    <div class="actions">
+      <button id="export" class="btn ghost" type="button">Exportar CSV</button>
+      <button id="new-deal" class="btn primary" type="button">+ Novo negócio</button>
+    </div>
+  </header>
+
+  <section class="kpis" aria-label="Indicadores">
+    <div class="kpi"><span>Em aberto</span><strong id="kpi-open">–</strong><small id="kpi-open-count"></small></div>
+    <div class="kpi"><span>Previsão ponderada</span><strong id="kpi-forecast">–</strong><small>valor × probabilidade da etapa</small></div>
+    <div class="kpi"><span>Ganhos</span><strong id="kpi-won">–</strong><small id="kpi-ticket"></small></div>
+    <div class="kpi"><span>Taxa de conversão</span><strong id="kpi-rate">–</strong><small id="kpi-stale"></small></div>
+  </section>
+
+  <main id="board" class="board" aria-label="Funil de vendas"></main>
+
+  <dialog id="deal-dialog" aria-labelledby="dialog-title">
+    <form id="deal-form" method="dialog">
+      <h2 id="dialog-title">Novo negócio</h2>
+      <label>Título <input name="title" required maxlength="120" /></label>
+      <div class="row">
+        <label>Empresa <input name="company" maxlength="120" /></label>
+        <label>Contato <input name="contact" maxlength="120" /></label>
+      </div>
+      <div class="row">
+        <label>Valor (R$) <input name="value" inputmode="decimal" placeholder="0,00" /></label>
+        <label>Responsável <input name="owner" maxlength="60" /></label>
+      </div>
+      <label>Etapa <select name="stage"></select></label>
+      <p class="form-error" id="form-error" role="alert"></p>
+      <div class="dialog-actions">
+        <button type="button" class="btn danger" id="delete-deal" hidden>Excluir</button>
+        <span class="spacer"></span>
+        <button type="button" class="btn ghost" id="cancel">Cancelar</button>
+        <button type="submit" class="btn primary">Salvar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="live" class="sr-only" aria-live="polite"></div>
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>
